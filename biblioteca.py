@@ -1,11 +1,12 @@
+import json
+import os
+
 books = {
     "titulo": "El Hobbit",
     "autor": "JRR Tolkien",
     "año": 1958, 
     "genero": "Fantasia"    
 }
-
-print(books)
 
 lista_de_libros = [
     {
@@ -29,10 +30,12 @@ lista_de_libros = [
 ]
 
 def agregar_libro(biblioteca, titulo, autor, año, genero): 
-    nuevo_libro = {"titulo" : titulo}, {"autor": autor}, {"año": año}, {"genero": genero}
+    nuevo_libro = {"titulo" : titulo, "autor": autor, "año": año, "genero": genero}
     biblioteca.append(nuevo_libro)
-    print(biblioteca)
-
+    export = json.dumps(biblioteca, indent=4)
+    with open ("biblioteca.json", "a") as f: 
+        f.write(export)
+        
 '''for libro in lista_de_libros: 
     print(f"{libro["autor"]} : {libro["titulo"]}")
 '''

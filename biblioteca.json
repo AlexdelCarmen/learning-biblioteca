@@ -1,0 +1,26 @@
+[
+    {
+        "titulo": "El Hobbit",
+        "autor": "JRR Tolkien",
+        "a\u00f1o": 1958,
+        "genero": "Fantasia"
+    },
+    {
+        "titulo": "La Comunidad del Anillo",
+        "autor": "JRR Tolkien",
+        "a\u00f1o": 1978,
+        "genero": "Fantasia"
+    },
+    {
+        "titulo": "Libros de Sangre 1",
+        "autor": "Clive Barker",
+        "a\u00f1o": 2001,
+        "genero": "Terror"
+    },
+    {
+        "titulo": "El Pescador",
+        "autor": "John Langan",
+        "a\u00f1o": 2021,
+        "genero": "Terror"
+    }
+]
