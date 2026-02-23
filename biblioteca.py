@@ -1,5 +1,5 @@
 import json
-import os
+import pprint
 
 PATH_BIBLIOTECA = "biblioteca.json"
 
@@ -17,7 +17,6 @@ def agregar_libro(biblioteca, titulo, autor, año, genero):
     with open (PATH_BIBLIOTECA, "w") as f: 
         json.dump(biblioteca, f, indent=4)
 
-
 def buscar_biblioteca(biblioteca, parametro, valor):
     resultado = [libro for libro in biblioteca if libro[parametro] == valor]
     return(resultado)
@@ -27,10 +26,8 @@ def buscar_por_autor(biblioteca, autor):
 
 def buscar_por_titulo(biblioteca, titulo):
     return(buscar_biblioteca(biblioteca, "titulo", titulo))
-
-def listar_libros(biblioteca):
-    return(biblioteca)
-
+             
+# Despliega resultados para busquedas o imprime un error si no hay matches
 def obtener_resultados(resultados):
     if len(resultados) == 0:
         print("No se encontraron resultados")
@@ -46,10 +43,14 @@ def menu_biblioteca():
                 "3. Buscar por titulo\n"
                 "4. Agregar libro\n"
                 "5. Salir"))
-        seleccion = input("Elige una opcion: ")
+        try: 
+            seleccion = int(input("Elige una opcion: "))
+        except ValueError:
+            print("Ingresa un numero valido")
+            continue
         
         if seleccion == 1: 
-            print(listar_libros(lista_de_libros))
+            pprint.pprint(lista_de_libros)
         
         elif seleccion == 2:
             autor = input("Ingresa el nombre del autor: ")
@@ -62,11 +63,11 @@ def menu_biblioteca():
             obtener_resultados(resultados)
         
         elif seleccion == 4: 
-            autor = input("Ingresa el autor: ")
             titulo = input("Ingresa el titulo: ")
+            autor = input("Ingresa el autor: ")
             año = int(input("Ingresa el año: "))
             genero = input("Ingresa el genero: ")
-            agregar_libro(lista_de_libros, autor, titulo, año, genero)
+            agregar_libro(lista_de_libros, titulo, autor, año, genero)
             print("Agregado con exito!")
 
         

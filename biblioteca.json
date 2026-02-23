@@ -40,5 +40,11 @@
         "autor": "JRR Tolkien",
         "a\u00f1o": 1986,
         "genero": "Fantasia"
+    },
+    {
+        "titulo": "La Balada de Tom el Negro",
+        "autor": "Victor LaValle",
+        "a\u00f1o": 2016,
+        "genero": "Terror"
     }
 ]
