@@ -1,6 +1,6 @@
 import json
 import pprint
-from logica import *
+from logica import agregar_libro, buscar_por_autor, buscar_por_titulo, PATH_BIBLIOTECA
 
 
 try:
