@@ -1,15 +1,7 @@
-import json
-import pprint
-from logica import agregar_libro, buscar_por_autor, buscar_por_titulo, PATH_BIBLIOTECA
 
+from logica import Biblioteca
 
-try:
-    with open (PATH_BIBLIOTECA) as biblioteca_json:
-        lista_de_libros = json.load(biblioteca_json)
-except FileNotFoundError: 
-    lista_de_libros = {}
-    print("Archivo no encontrado")
-
+biblioteca = Biblioteca()
             
 # Despliega resultados para busquedas o imprime un error si no hay matches
 def obtener_resultados(resultados):
@@ -34,16 +26,16 @@ def menu_biblioteca():
             continue
         
         if seleccion == 1: 
-            pprint.pprint(lista_de_libros)
+            biblioteca.imprimir_lista()
         
         elif seleccion == 2:
             autor = input("Ingresa el nombre del autor: ")
-            resultados = buscar_por_autor(lista_de_libros, autor)
+            resultados = biblioteca.buscar_por_autor(autor)
             obtener_resultados(resultados)
         
         elif seleccion == 3: 
             titulo = input("Ingresa el titulo: ")
-            resultados = buscar_por_titulo(lista_de_libros, titulo)
+            resultados = biblioteca.buscar_por_titulo(titulo)
             obtener_resultados(resultados)
         
         elif seleccion == 4: 
@@ -51,7 +43,7 @@ def menu_biblioteca():
             autor = input("Ingresa el autor: ")
             año = int(input("Ingresa el año: "))
             genero = input("Ingresa el genero: ")
-            agregar_libro(lista_de_libros, titulo, autor, año, genero)
+            biblioteca.agregar_libro(titulo, autor, año, genero)
             print("Agregado con exito!")
 
         
