@@ -52,5 +52,17 @@
         "autor": "HP Lovecarft",
         "a\u00f1o": 1918,
         "genero": "Terror"
+    },
+    {
+        "titulo": "Dr\u00e1cula",
+        "autor": "Bram Stoker",
+        "a\u00f1o": 1897,
+        "genero": "Terror"
+    },
+    {
+        "titulo": "Frankenstein",
+        "autor": "Mary Shelley",
+        "a\u00f1o": 1897,
+        "genero": "Terror"
     }
 ]
