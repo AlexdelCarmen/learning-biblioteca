@@ -10,7 +10,7 @@ def index():
 
 @app.route("/libros", methods=["GET"])
 def index_libros():
-    return jsonify(biblioteca.libros)
+    return jsonify(biblioteca.obtener_libros())
 
 @app.route("/libros/autor/<autor>")
 def buscar_autor(autor):
