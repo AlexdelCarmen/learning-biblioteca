@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from logica import Biblioteca
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 biblioteca = Biblioteca()
 
