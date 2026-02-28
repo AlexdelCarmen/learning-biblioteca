@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from logica import Biblioteca
 from flask_cors import CORS
 app = Flask(__name__)
@@ -8,7 +8,7 @@ biblioteca = Biblioteca()
 
 @app.route("/")
 def index():
-    return "Hola desde flask"
+    return send_from_directory(".", "index.html")
 
 @app.route("/libros", methods=["GET"])
 def index_libros():

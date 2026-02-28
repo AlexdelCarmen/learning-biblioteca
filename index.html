@@ -425,7 +425,7 @@
     }
 
     async function obtenerLibros() {
-        const response = await fetch("http://127.0.0.1:5000/libros");
+        const response = await fetch("/libros");
         const datos = await response.json();
         return datos;
     }
@@ -435,7 +435,7 @@
         const autor = document.getElementById("autor").value;
         const año = parseInt(document.getElementById("año").value);
         const genero = document.getElementById("genero").value;
-        const response = await fetch("http://127.0.0.1:5000/libros", {
+        const response = await fetch("/libros", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({titulo, autor, año, genero})
@@ -446,7 +446,7 @@
 
     async function buscarAutor() {
         const autor = document.getElementById("buscar_autor").value;
-        const url = "http://127.0.0.1:5000/libros/autor/" + autor;
+        const url = "/libros/autor/" + autor;
         const response = await fetch(url);
         const datos = await response.json();
         return datos;
