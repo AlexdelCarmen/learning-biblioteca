@@ -1,90 +1,490 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Biblioteca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0e0d0b;
+            --surface: #161512;
+            --border: #2a2820;
+            --gold: #c9a84c;
+            --gold-dim: #8a6e2f;
+            --cream: #e8e0cc;
+            --muted: #6b6455;
+            --text: #d4c9b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            min-height: 100vh;
+            padding: 0 0 80px 0;
+        }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid var(--border);
+            padding: 48px 64px 32px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            animation: fadeDown 0.8s ease both;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .issue-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .header-right {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            text-align: right;
+            line-height: 2;
+            letter-spacing: 0.1em;
+        }
+
+        /* LAYOUT */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 64px 64px 0;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 64px;
+        }
+
+        /* SECTION TITLES */
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.3em;
+            color: var(--gold-dim);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* CATALOG SECTION */
+        .catalog-section {
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+
+        .catalog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .catalog-header .section-label {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        #mostrar {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: transparent;
+            border: 1px solid var(--gold-dim);
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #mostrar:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        /* BOOK LIST */
+        #show {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #show p {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+            line-height: 1.4;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        #show p .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--cream);
+            display: block;
+        }
+
+        #show p .book-meta {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            display: block;
+            margin-top: 4px;
+        }
+
+        #show p .book-year {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold-dim);
+            font-size: 1rem;
+            align-self: center;
+        }
+
+        /* SIDEBAR */
+        aside {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            animation: fadeUp 0.8s ease 0.2s both;
+        }
+
+        /* FORM */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        label {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--cream);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 300;
+            padding: 10px 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+            width: 100%;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: var(--gold-dim);
+        }
+
+        input[type="text"]::placeholder,
+        input[type="number"]::placeholder {
+            color: var(--muted);
+            opacity: 0.5;
+        }
+
+        .btn-primary {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--gold);
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--cream);
+        }
+
+        /* SEARCH SECTION */
+        .search-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .search-row input {
+            flex: 1;
+        }
+
+        #por_autor {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: transparent;
+            border: 1px solid var(--gold-dim);
+            padding: 10px 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        #por_autor:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        /* SEARCH RESULTS */
+        #show_autor {
+            display: flex;
+            flex-direction: column;
+            margin-top: 16px;
+        }
+
+        #show_autor p {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        #show_autor p .book-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--cream);
+            display: block;
+        }
+
+        #show_autor p .book-meta {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* DIVIDER */
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold-dim);
+            margin: 0 auto 32px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--surface);
+            border: 1px solid var(--gold-dim);
+            color: var(--cream);
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            padding: 14px 20px;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 32px 24px 24px; }
+            main { grid-template-columns: 1fr; padding: 40px 24px 0; gap: 48px; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a la Biblioteca</h1>
-    <br>
-    <button id="mostrar">Mostrar todos los libros</button>
-    <span id="show"></span>
-    <br>
-    <form action="" method="post">
-        <h2>Ingresar un nuevo libro</h2>
-        <label for="titulo">Titulo</label>
-        <input type="text" name="titulo" id="titulo">
-        <label for="autor">Autor</label>
-        <input type="text" name="autor" id="autor">
-        <label for="año">Año</label>
-        <input type="number" name="año" id="año">
-        <label for="genero">Genero</label>
-        <input type="text" name="genero" id="genero">
-        <input type="submit" value="Agregar" id="submit">
-    </form>
-    <br>
-    <form method="get">
-        <h2>Buscar un libro</h2>
-        <label for="buscar_autor">Por autor: </label>
-        <input type="text" id="buscar_autor" name="buscar_autor">
-        <input type="button" value="Buscar" id="por_autor">
-    </form>
-    <span id="show_autor"></span>
-</body>
+
+<header>
+    <div class="header-left">
+        <span class="issue-label">Colección Personal · Est. 2025</span>
+        <h1>La <em>Biblio</em>teca</h1>
+    </div>
+    <div class="header-right">
+        CATÁLOGO<br>DIGITAL<br>PERSONAL
+    </div>
+</header>
+
+<main>
+    <!-- CATALOG -->
+    <section class="catalog-section">
+        <div class="catalog-header">
+            <span class="section-label">Catálogo completo</span>
+            <button id="mostrar">Ver todos</button>
+        </div>
+        <div id="show"></div>
+    </section>
+
+    <!-- SIDEBAR -->
+    <aside>
+        <!-- ADD BOOK -->
+        <div>
+            <div class="section-label">Ingresar nuevo título</div>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" id="titulo" placeholder="Nombre del libro">
+                </div>
+                <div class="form-group">
+                    <label for="autor">Autor</label>
+                    <input type="text" name="autor" id="autor" placeholder="Nombre del autor">
+                </div>
+                <div class="form-group">
+                    <label for="año">Año</label>
+                    <input type="number" name="año" id="año" placeholder="YYYY">
+                </div>
+                <div class="form-group">
+                    <label for="genero">Género</label>
+                    <input type="text" name="genero" id="genero" placeholder="Género literario">
+                </div>
+                <input type="submit" class="btn-primary" value="Registrar título" id="submit">
+            </form>
+        </div>
+
+        <!-- SEARCH -->
+        <div>
+            <div class="section-label">Buscar por autor</div>
+            <div class="search-row">
+                <input type="text" id="buscar_autor" placeholder="Nombre del autor">
+                <button id="por_autor">Buscar</button>
+            </div>
+            <div id="show_autor"></div>
+        </div>
+    </aside>
+</main>
+
+<div class="toast" id="toast"></div>
+
 <script>
-    const botonMostrar = document.getElementById("mostrar");
-    
+    function showToast(msg) {
+        const toast = document.getElementById("toast");
+        toast.textContent = msg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
     async function obtenerLibros() {
         const response = await fetch("http://127.0.0.1:5000/libros");
         const datos = await response.json();
-        console.log(datos);
         return datos;
     }
 
     async function agregarLibro() {
-        const titulo = document.getElementById("titulo").value; 
-        const autor = document.getElementById("autor").value; 
-        const año = parseInt(document.getElementById("año").value); 
-        const genero = document.getElementById("genero").value; 
-
+        const titulo = document.getElementById("titulo").value;
+        const autor = document.getElementById("autor").value;
+        const año = parseInt(document.getElementById("año").value);
+        const genero = document.getElementById("genero").value;
         const response = await fetch("http://127.0.0.1:5000/libros", {
             method: "POST",
-            headers: {"Content-Type": "application/json"}, 
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({titulo, autor, año, genero})
         });
         const datos = await response.json();
-        console.log(datos);
+        return datos;
     }
 
     async function buscarAutor() {
         const autor = document.getElementById("buscar_autor").value;
-        const url = "http://127.0.0.1:5000/libros/autor" + "/" + autor; 
-        const response = await fetch(url); 
+        const url = "http://127.0.0.1:5000/libros/autor/" + autor;
+        const response = await fetch(url);
         const datos = await response.json();
-        console.log(datos); 
         return datos;
+    }
+
+    function renderLibros(libros, containerId) {
+        const container = document.getElementById(containerId);
+        if (libros.length === 0) {
+            container.innerHTML = `<p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:10px;padding:16px 0;">Sin resultados</p>`;
+            return;
+        }
+        container.innerHTML = libros.map(libro => `
+            <p>
+                <span>
+                    <span class="book-title">${libro.titulo}</span>
+                    <span class="book-meta">${libro.autor} · ${libro.genero}</span>
+                </span>
+                <span class="book-year">${libro.año}</span>
+            </p>
+        `).join("");
     }
 
     document.getElementById("mostrar").addEventListener("click", async function() {
         const libros = await obtenerLibros();
-        document.getElementById("show").innerHTML = libros.map(
-            libro => `<p>${libro.titulo} - ${libro.autor} - ${libro.año} - ${libro.genero}</p>`
-        ).join("");
+        renderLibros(libros, "show");
     });
 
     document.getElementById("submit").addEventListener("click", async function(event) {
-        event.preventDefault(); 
+        event.preventDefault();
         await agregarLibro();
+        showToast("Título registrado con éxito");
+        document.querySelector("form").reset();
     });
 
-    document.getElementById("por_autor").addEventListener("click", async function () {
-        const libros = await buscarAutor(); 
-        document.getElementById("show_autor").innerHTML = libros.map(
-            libro => `<p>${libro.titulo} - ${libro.año} - ${libro.genero}</p>`
-        ).join("");
+    document.getElementById("por_autor").addEventListener("click", async function() {
+        const libros = await buscarAutor();
+        renderLibros(libros, "show_autor");
     });
-
-
 </script>
+</body>
 </html>
